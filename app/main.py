@@ -1,9 +1,7 @@
 import bottle
 import os
-import random
 import numpy
-
-
+import random
 @bottle.route('/')
 def static():
     return "the server is running"
