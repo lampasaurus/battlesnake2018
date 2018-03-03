@@ -2,7 +2,7 @@ import bottle
 import os
 import random
 import astar
-
+import numpy as np
 
 @bottle.route('/')
 def static():
@@ -29,7 +29,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#00000F',
+        'color': '#0000FF',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url
     }
@@ -37,18 +37,19 @@ def start():
 
 @bottle.post('/move')
 def move():
-    data = bottle.request.json
-	board = createMap(data)
+	data = bottle.request.json
+	
     # TODO: Do things with data
-    print board
-    directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
-    print direction
-    return {
+    
+	directions = ['up', 'down', 'left', 'right']
+	direction = random.choice(directions)
+	createMap(data)
+	print direction
+	return {
         'move': direction,
         'taunt': 'battlesnake-python!'
     }
-	
+
 #Creates a map of the game board from data
 #Call on each move
 def createMap(data):
@@ -57,12 +58,8 @@ def createMap(data):
 		for data in snake['data']['body']['data']:
 			map[data.x, data.y] = WALL
 			
-	for food in data['food']['data']:
-		map[food.x, food.y] = FOOD
-		
-	print map;
+	print np.matrix(map);
 	return map
-
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 
