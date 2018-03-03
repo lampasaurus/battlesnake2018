@@ -37,17 +37,18 @@ def start():
 
 @bottle.post('/move')
 def move():
-    data = bottle.request.json
-
-    # TODO: Do things with data
-    
-    directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
-    print direction
-    return {
-        'move': direction,
-        'taunt': 'battlesnake-python!'
-    }
+	data = bottle.request.json
+	
+	# TODO: Do things with data
+	
+	directions = ['up', 'down', 'left', 'right']
+	direction = random.choice(directions)
+	print direction
+	map = createMap(data)
+	return {
+		'move': direction,
+		'taunt': 'battlesnake-python!'
+	}
 
 def createMap(data):
 	map =[[0 for x in range(data['width'])] for y in range(data['height'])] 
