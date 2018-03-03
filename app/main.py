@@ -1,7 +1,7 @@
 import bottle
 import os
-import numpy
 import random
+
 @bottle.route('/')
 def static():
     return "the server is running"
@@ -36,7 +36,11 @@ def start():
 @bottle.post('/move')
 def move():
 	data = bottle.request.json
-	
+	for snek in data['snakes']['data']:
+		if snek['id'] == snake_id:
+			my_snake = snek
+			head = my_snake['body']['data'][0]
+	print head
 	# TODO: Do things with data
 	
 	directions = ['up', 'down', 'left', 'right']
