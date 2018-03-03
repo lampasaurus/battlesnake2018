@@ -1,7 +1,7 @@
 import bottle
 import os
 import random
-import numpy
+#import numpy
 
 
 @bottle.route('/')
@@ -55,7 +55,6 @@ def createMap(data):
 	for snake in data['snakes']['data']:
 		for coord in snake['body']['data']:
 			map[coord['y']][coord['x']] = WALL
-	print(map);
 	return map
 
 # Expose WSGI app (so gunicorn can find it)
