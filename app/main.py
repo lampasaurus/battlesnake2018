@@ -44,6 +44,7 @@ def move():
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
     print direction
+	map = createMap(data)
     return {
         'move': direction,
         'taunt': 'battlesnake-python!'
@@ -52,6 +53,14 @@ def move():
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
+
+
+def createMap(data):
+	map =[[0 for x in range(data['width'])] for y in range(data['height'])] 
+	for snake in data['snakes']['data']:
+		for coord in snake['body']['data']:
+			map[coord['y']][coord['x']] = WALL
+	return map
 
 if __name__ == '__main__':
     bottle.run(
