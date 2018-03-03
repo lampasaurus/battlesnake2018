@@ -43,24 +43,14 @@ def move():
     
 	directions = ['up', 'down', 'left', 'right']
 	direction = random.choice(directions)
-	createMap(data)
+	
 	print direction
 	return {
         'move': direction,
         'taunt': 'battlesnake-python!'
     }
 
-#Creates a map of the game board from data
-#Call on each move
-def createMap(data):
-	map =[[0 for x in range(board_width)] for y in range(board_height)] 
-	for snake in data['snakes']:
-		for data in snake['data']['body']['data']:
-			map[data.x, data.y] = WALL
-			
-	print np.matrix(map);
-	return map
-# Expose WSGI app (so gunicorn can find it)
+
 application = bottle.default_app()
 
 if __name__ == '__main__':
