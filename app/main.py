@@ -1,7 +1,7 @@
 import bottle
 import os
 import random
-#import numpy
+import numpy
 
 
 @bottle.route('/')
